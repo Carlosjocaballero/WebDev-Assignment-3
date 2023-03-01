@@ -72,14 +72,8 @@ function removeC() {
     // get all rows and remove last one
     let allRows = grid.querySelectorAll("tr");
 
-
     // remove all rows if one column
-    if (numCols === 1) {
-        numRows++;
-        for (let i = numRows; i > 0; i++) {
-            removeR();
-        }
-    }
+    if (numCols === 1) grid.innerHTML = '';
 
     // remove one column from each row
     for (let i = 0; i < numRows; i++) {
