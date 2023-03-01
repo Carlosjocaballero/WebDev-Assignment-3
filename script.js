@@ -1,16 +1,50 @@
-// Declare global variables
+// Declare global variables 
 let numRows = 0;
 let numCols = 0;
 let colorSelected; 
 
 // Add a row
 function addR() {
-    alert("Clicked Add Row"); // Replace this line with your code.
+    // get the grid 
+    let grid = document.getElementById("grid");
+
+    // create a new row 
+    let row = document.createElement("tr");
+
+    // add appropriate columns
+    if (numCols === 0) numCols++;
+    for (let i = 0; i < numCols; i++) {
+        row.appendChild(document.createElement("td"));
+    }
+
+    // add created row
+    grid.appendChild(row);
+
+    // increment rows
+    numRows++;
 }
 
 // Add a column
 function addC() {
-    alert("Clicked Add Col"); // Replace this line with your code.
+    // get the grid 
+    let grid = document.getElementById("grid");
+
+    // get all rows
+    let allRows = document.querySelectorAll("tr");
+
+    // add a column
+    for (let i = 0; i < numRows; i++) {
+        allRows[i].appendChild(document.createElement("td"));
+    }
+    
+    // if there were no rows, add a row
+    if (numRows === 0) {
+        addR();
+        numCols--;
+    } 
+
+    // increment cols
+    numCols++;
 }
 
 // Remove a row
