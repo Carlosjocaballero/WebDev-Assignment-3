@@ -14,7 +14,9 @@ function addR() {
     // add appropriate columns
     if (numCols === 0) numCols++;
     for (let i = 0; i < numCols; i++) {
-        row.appendChild(document.createElement("td"));
+        let col = document.createElement("td");
+        col.onclick = function(){ this.style.backgroundColor = colorSelected; };
+        row.appendChild(col); 
     }
 
     // add created row
@@ -37,7 +39,9 @@ function addC() {
 
     // add a column
     for (let i = 0; i < numRows; i++) {
-        allRows[i].appendChild(document.createElement("td"));
+        let col = document.createElement("td");
+        col.onclick = function(){ this.style.backgroundColor = colorSelected; };
+        allRows[i].appendChild(col);
     }
 
     // increment cols
@@ -93,15 +97,49 @@ function selectColor(){
 
 // Fill all uncolored cells
 function fillU(){
-    alert("Clicked Fill All Uncolored"); // Replace this line with your code.
+        // get the grid 
+        let grid = document.getElementById("grid");
+    
+        //for every row and column
+        for (let row of grid.rows) 
+        {
+            for(let cell of row.cells) 
+            {
+                // fill in the cells that are empty with colorSelected
+                if(cell.style.backgroundColor === "")
+                    cell.style.backgroundColor = colorSelected;
+            }
+        }
 }
 
 // Fill all cells
 function fillAll(){
-    alert("Clicked Fill All"); // Replace this line with your code.
+    // get the grid 
+    let grid = document.getElementById("grid");
+
+    // for every row and column
+    for (let row of grid.rows) 
+    {
+        for(let cell of row.cells) 
+        {
+            // fill the cell with the selected color
+           cell.style.backgroundColor = colorSelected;
+        }
+    }
 }
 
 // Clear all cells
 function clearAll(){
-    alert("Clicked Clear All"); // Replace this line with your code.
+    // get the grid 
+    let grid = document.getElementById("grid");
+    
+    // for every row and column
+    for (let row of grid.rows) 
+    {
+        for(let cell of row.cells) 
+        {
+            // clear the cell color
+           cell.style.backgroundColor = "";
+        }
+    }
 }
