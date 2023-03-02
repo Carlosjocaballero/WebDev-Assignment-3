@@ -26,35 +26,63 @@ function addR() {
 
 // Add a column
 function addC() {
-    // get the grid 
-    let grid = document.getElementById("grid");
+    // if there were no rows, add a row
+    if (numRows === 0) {
+        addR();
+        return;
+    } 
 
     // get all rows
-    let allRows = document.querySelectorAll("tr");
+    let allRows = document.getElementById("grid").querySelectorAll("tr");
 
     // add a column
     for (let i = 0; i < numRows; i++) {
         allRows[i].appendChild(document.createElement("td"));
     }
-    
-    // if there were no rows, add a row
-    if (numRows === 0) {
-        addR();
-        numCols--;
-    } 
 
     // increment cols
-    numCols++;
+    numCols++;    
 }
 
 // Remove a row
 function removeR() {
-    alert("Clicked Remove Row"); // Replace this line with your code.
+    // ignore empty table
+    if (numRows === 0) return;
+
+    // get the grid 
+    let grid = document.getElementById("grid");
+
+    // get all rows and remove last one
+    let allRows = grid.querySelectorAll("tr");
+    grid.removeChild(allRows[allRows.length - 1]);
+
+    // decrement rows
+    numRows--;
+    if (numRows === 0) numCols = 0;
 }
 
 // Remove a column
 function removeC() {
-    alert("Clicked Remove Col"); // Replace this line with your code.
+    // ignore empty table
+    if (numCols === 0) return;
+
+    // get the grid 
+    let grid = document.getElementById("grid");
+
+    // get all rows and remove last one
+    let allRows = grid.querySelectorAll("tr");
+
+    // remove all rows if one column
+    if (numCols === 1) grid.innerHTML = '';
+
+    // remove one column from each row
+    for (let i = 0; i < numRows; i++) {
+        allRows[i].removeChild(allRows[i].lastChild);
+    }
+
+    // decrement cols
+    numCols--;
+    if (numCols === 0) numRows = 0;
 }
 
 // Set global variable for selected color
